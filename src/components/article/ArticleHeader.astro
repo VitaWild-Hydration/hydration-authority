@@ -1,5 +1,6 @@
 ---
 import Kicker from './Kicker.astro';
+import { getAuthor } from '../../data/authors';
 
 interface Props {
   kicker: string;
@@ -8,6 +9,7 @@ interface Props {
   updated: string;
 }
 const { kicker, title, author, updated } = Astro.props;
+const a = getAuthor(author);
 ---
 
 <header class="pt-8 md:pt-12 pb-6">
@@ -15,10 +17,21 @@ const { kicker, title, author, updated } = Astro.props;
   <h1 class="font-heading font-bold text-[2.4rem] md:text-[2.8rem] leading-[1.15] tracking-[0.01em] text-ink-primary mb-5">
     {title}
   </h1>
-  <hr class="border-0 border-t border-border-card mb-3" />
-  <p class="text-ink-muted text-[1rem]">
-    <span class="font-semibold text-ink-primary">By {author}</span>
-    <span class="mx-2">·</span>
-    <span>Updated: {updated}</span>
-  </p>
+  <hr class="border-0 border-t border-border-card mb-4" />
+  <div class="flex items-center gap-3">
+    {a.avatar && (
+      <img
+        src={a.avatar}
+        alt={a.name}
+        width="48"
+        height="48"
+        class="w-12 h-12 rounded-full object-cover shrink-0"
+        loading="eager"
+      />
+    )}
+    <div class="leading-tight">
+      <p class="text-ink-primary text-[1rem] font-semibold">By {a.name}</p>
+      <p class="text-ink-muted text-[0.95rem]">Updated: {updated}</p>
+    </div>
+  </div>
 </header>
