@@ -42,7 +42,7 @@ const QUERIES = {
   'kids-pediatrician-picks':                   'child drinking from cup healthy',
   'magnesium-citrate-vs-glycinate-vs-threonate': 'supplement pills hand minimal',
   'magnesium-for-sleep-30-nights':             'nightstand dim lamp bedroom peaceful',
-  'morning-order-trick-before-coffee':         'kitchen pour over coffee sunrise',
+  'morning-order-trick-before-coffee':         'morning kitchen counter water glass minimal calm',
   'other-macro-protein-hydration':             'athletic person gym water bottle',
   'perimenopause-3-minerals':                  'woman wellness lifestyle natural light',
   'postpartum-or-mineral-deficiency':          'tired new mother baby home',
