@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://hydrationauthority.com',
+  site: 'https://blog.hydrationauthority.com',
   trailingSlash: 'never',
   integrations: [mdx(), sitemap()],
   vite: {
