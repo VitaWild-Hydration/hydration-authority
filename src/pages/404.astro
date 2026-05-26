@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you're looking for couldn't be found."
+>
+  <section class="py-20 text-center">
+    <h1 class="font-heading font-bold text-h1 mb-4">Page not found</h1>
+    <p class="text-[1.2rem] mb-8">
+      We couldn't find what you were looking for.
+    </p>
+    <a
+      href="/"
+      class="inline-flex bg-brand-orange text-ink-primary font-body font-black text-[1.3rem] tracking-[0.07em] rounded-[10px] px-7 py-3 no-underline hover:brightness-95"
+    >
+      Back to home
+    </a>
+  </section>
+</BaseLayout>

@@ -1,0 +1,10 @@
+---
+interface Props {
+  rank: number;
+}
+const { rank } = Astro.props;
+---
+
+<div class="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-ink-primary text-brand-orange font-heading font-bold text-[1.8rem] md:text-[2rem] leading-none shadow-sm">
+  {rank}
+</div>

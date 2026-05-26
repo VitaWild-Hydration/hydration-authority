@@ -1,0 +1,12 @@
+---
+// Two links — Terms & Privacy — both point to /terms (matches existing site).
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-surface-card border-t border-border-card mt-16 py-10 px-6 text-center text-ink-muted">
+  <nav class="flex items-center justify-center gap-8 text-[0.95rem]">
+    <a href="/terms" class="hover:text-ink-primary underline-offset-4 hover:underline">Terms &amp; Conditions</a>
+    <a href="/terms" class="hover:text-ink-primary underline-offset-4 hover:underline">Privacy Policy</a>
+  </nav>
+  <p class="mt-4 text-[0.85rem]">© {year} Hydration Authority</p>
+</footer>

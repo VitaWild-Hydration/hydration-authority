@@ -1,0 +1,24 @@
+---
+import Kicker from './Kicker.astro';
+
+interface Props {
+  kicker: string;
+  title: string;
+  author: string;
+  updated: string;
+}
+const { kicker, title, author, updated } = Astro.props;
+---
+
+<header class="pt-8 md:pt-12 pb-6">
+  <Kicker label={kicker} />
+  <h1 class="font-heading font-bold text-[2.4rem] md:text-[2.8rem] leading-[1.15] tracking-[0.01em] text-ink-primary mb-5">
+    {title}
+  </h1>
+  <hr class="border-0 border-t border-border-card mb-3" />
+  <p class="text-ink-muted text-[1rem]">
+    <span class="font-semibold text-ink-primary">By {author}</span>
+    <span class="mx-2">·</span>
+    <span>Updated: {updated}</span>
+  </p>
+</header>

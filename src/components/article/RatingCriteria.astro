@@ -1,0 +1,37 @@
+---
+// The standard 4-criteria explainer. Used once in the intro of every article.
+const criteria = [
+  {
+    name: 'Taste',
+    body: 'Especially important when managing nausea or for sensitive stomachs — a hydration drink only works if you actually want to drink it.',
+  },
+  {
+    name: 'Electrolyte & Mineral Content',
+    body: 'The minerals that drive real hydration, nerve signaling, and digestion support — not just sodium for the sake of sodium.',
+  },
+  {
+    name: 'Ingredients',
+    body: 'Clean label, no fillers, no artificial dyes, no random additives that have no business in a hydration mix.',
+  },
+  {
+    name: 'Sweeteners',
+    body: 'Zero sugar where possible, gentle on the gut, no blood-sugar spikes, no aspartame, no sucralose-bomb aftertaste.',
+  },
+];
+---
+
+<section class="my-8">
+  <p class="text-[1.2rem] md:text-[1.3rem] leading-[1.55] mb-4">
+    Here's how I scored every product, on a scale of 1 to 10, against the four criteria that actually matter:
+  </p>
+  <ul class="space-y-3 list-none p-0">
+    {criteria.map((c) => (
+      <li class="text-[1.1rem] md:text-[1.2rem] leading-[1.55]">
+        <strong class="font-black">{c.name}:</strong> {c.body}
+      </li>
+    ))}
+  </ul>
+  <p class="mt-5 text-[1.2rem] md:text-[1.3rem] leading-[1.55]">
+    Below, I've shared my honest insights and rankings.
+  </p>
+</section>

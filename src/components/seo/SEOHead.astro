@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  author?: string;
+  updated?: string;
+  jsonLd?: Record<string, unknown> | null;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  type = 'website',
+  author,
+  updated,
+  jsonLd = null,
+} = Astro.props;
+
+const siteName = 'Hydration Authority';
+const fullTitle = title.includes(siteName) ? title : `${title} — ${siteName}`;
+const url = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
+const image = ogImage
+  ? new URL(ogImage, Astro.site).toString()
+  : new URL('/favicon.ico', Astro.site).toString();
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+{type === 'article' && author && <meta property="article:author" content={author} />}
+{type === 'article' && updated && <meta property="article:modified_time" content={updated} />}
+
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}

@@ -1,0 +1,154 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import ArticleHeader from '../components/article/ArticleHeader.astro';
+import HeroImage from '../components/article/HeroImage.astro';
+import RankingBlock from '../components/ranking/RankingBlock.astro';
+import RatingCriteria from '../components/article/RatingCriteria.astro';
+import { marked } from 'marked';
+import EditorialInterlude from '../components/article/EditorialInterlude.astro';
+import Conclusion from '../components/article/Conclusion.astro';
+import FinalChoiceCard from '../components/article/FinalChoiceCard.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { data } = article;
+const { Content } = await render(article);
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const publisher = {
+  '@type': 'Organization',
+  name: 'Hydration Authority',
+  logo: {
+    '@type': 'ImageObject',
+    url: new URL('/images/logo/ha-horizontal.png', Astro.site).toString(),
+  },
+};
+
+const articleSchema = {
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  author: { '@type': 'Person', name: data.author },
+  datePublished: data.updated,
+  dateModified: data.updated,
+  image: new URL(data.heroImage, Astro.site).toString(),
+  publisher,
+  mainEntityOfPage: pageUrl,
+};
+
+const itemList = {
+  '@type': 'ItemList',
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: data.rankings.length,
+  itemListElement: data.rankings.map((r) => ({
+    '@type': 'ListItem',
+    position: r.rank,
+    item: {
+      '@type': 'Review',
+      name: `${r.productName} review`,
+      reviewBody: r.haSays,
+      itemReviewed: {
+        '@type': 'Product',
+        name: r.productName,
+        brand: { '@type': 'Brand', name: r.brand },
+        ...(r.productImage
+          ? { image: new URL(r.productImage, Astro.site).toString() }
+          : {}),
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: r.score,
+        bestRating: 10,
+        worstRating: 1,
+      },
+      author: { '@type': 'Person', name: data.author },
+      publisher,
+      url: r.ctaUrl,
+    },
+  })),
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [articleSchema, itemList],
+};
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  ogImage={data.heroImage}
+  type="article"
+  author={data.author}
+  updated={data.updated}
+  jsonLd={jsonLd}
+>
+  <article class="max-w-[920px] mx-auto">
+    <ArticleHeader
+      kicker={data.kicker}
+      title={data.title}
+      author={data.author}
+      updated={data.updated}
+    />
+    <HeroImage src={data.heroImage} alt={data.title} />
+    {data.topicBanner && (
+      <img
+        src={data.topicBanner}
+        alt=""
+        class="w-full h-auto rounded-sm my-4"
+        loading="lazy"
+      />
+    )}
+
+    {/* MDX body — author writes the intro narrative + rating criteria.
+        Available components: <EditorialInterlude>, <RatingCriteria> */}
+    <section class="prose-ha">
+      <Content components={{ EditorialInterlude, RatingCriteria }} />
+    </section>
+
+    {data.rankings.map((r) => (
+      <>
+        <RankingBlock
+          rank={r.rank}
+          brand={r.brand}
+          productName={r.productName}
+          productLogo={r.productLogo}
+          productImage={r.productImage}
+          score={r.score}
+          stars={r.stars}
+          body={r.body}
+          ratings={r.ratings}
+          haSays={r.haSays}
+          ctaUrl={r.ctaUrl}
+          promoDisclaimer={r.promoDisclaimer}
+        />
+        {r.interludeAfter && (
+          <section class="my-12 prose-ha max-w-[820px] mx-auto" set:html={marked.parse(r.interludeAfter)} />
+        )}
+      </>
+    ))}
+
+    {data.conclusion && (
+      <Conclusion wrapTitle={data.conclusion.wrapTitle}>
+        <div set:html={marked.parse(data.conclusion.body)} />
+      </Conclusion>
+    )}
+
+    {data.finalChoice && (
+      <FinalChoiceCard
+        productName={data.finalChoice.productName}
+        useCase={data.finalChoice.useCase}
+        summary={data.finalChoice.summary}
+        ctaUrl={data.finalChoice.ctaUrl}
+      />
+    )}
+  </article>
+</BaseLayout>

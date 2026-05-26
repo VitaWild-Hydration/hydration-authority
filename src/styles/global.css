@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-brand-orange: #FF9D00;
+  --color-ink-primary: #000000;
+  --color-ink-muted: #797979;
+  --color-surface-page: #F5F5F5;
+  --color-surface-card: #FFFFFF;
+  --color-border-card: rgba(0, 0, 0, 0.1);
+
+  /* Fonts */
+  --font-heading: "Rubik", system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+
+  /* Type scale — paragraphs */
+  --text-p3: 0.9rem;
+  --text-p3--line-height: 1.6;
+  --text-p3--letter-spacing: 0.02em;
+  --text-p2: 1.3rem;
+  --text-p2--line-height: 1.6;
+  --text-p2--letter-spacing: 0.02em;
+  --text-p1: 1.4rem;
+  --text-p1--line-height: 1.6;
+  --text-p1--letter-spacing: 0.02em;
+
+  /* Type scale — headings */
+  --text-h4: 1.6rem;
+  --text-h4--line-height: 1.2;
+  --text-h4--letter-spacing: 0.03em;
+  --text-h3: 1.8rem;
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: 0.03em;
+  --text-h2: 2.1rem;
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: 0.03em;
+  --text-h1: 2.8rem;
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: 0.03em;
+
+  /* Score number */
+  --text-score: 2.8rem;
+
+  /* Buttons */
+  --text-btn: 1.5rem;
+  --text-btn--line-height: 1;
+  --text-btn--letter-spacing: 0.07em;
+
+  /* Radius */
+  --radius-btn: 10px;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-surface-page);
+  color: var(--color-ink-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  color: var(--color-ink-primary);
+}
+
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+
+p { font-size: var(--text-p1); }
+
+a { color: inherit; }
+
+/* Article body — applied to MDX content rendered through <slot> */
+.prose-ha p { font-size: var(--text-p1); margin-block: 1em; }
+.prose-ha strong { font-weight: 900; }
+.prose-ha a { color: var(--color-brand-orange); text-decoration: underline; }
+.prose-ha ul { list-style: disc; padding-left: 1.5em; }
+.prose-ha li { font-size: var(--text-p1); margin-block: 0.4em; }
+.prose-ha h2 { font-size: var(--text-h2); margin-top: 1.5em; margin-bottom: 0.5em; }
+.prose-ha h3 { font-size: var(--text-h3); margin-top: 1.25em; margin-bottom: 0.5em; }
+.prose-ha em { font-style: italic; }

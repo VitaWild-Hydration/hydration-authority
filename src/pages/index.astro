@@ -1,17 +1,45 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../components/layout/BaseLayout.astro';
 
+const articles = (await getCollection('articles')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Hydration Authority — Honest reviews of hydration, electrolyte, and mineral products"
+  description="Independent reviews of electrolyte drinks, mineral supplements, and hydration products — tested honestly, scored on taste, mineral content, ingredients, and sweeteners."
+>
+  <section class="py-8">
+    <p class="text-[1.3rem] leading-[1.55] max-w-[760px] mb-10">
+      We test hydration, electrolyte, and mineral products against four criteria that actually matter: taste, electrolyte and mineral content, ingredient quality, and sweeteners. Below are the latest reviews.
+    </p>
+
+    <ul class="grid gap-6 sm:grid-cols-2 list-none p-0">
+      {articles.map((a) => (
+        <li class="bg-surface-card border border-border-card rounded-sm overflow-hidden">
+          <a href={`/${a.id}`} class="block hover:opacity-90 transition">
+            <img
+              src={a.data.heroImage}
+              alt=""
+              class="w-full h-48 object-cover"
+              loading="lazy"
+            />
+            <div class="p-5">
+              <p class="font-body uppercase text-[0.9rem] tracking-[0.08em] text-ink-muted mb-2">
+                {a.data.kicker}
+              </p>
+              <h2 class="font-heading font-bold text-[1.5rem] leading-tight mb-2">
+                {a.data.title}
+              </h2>
+              <p class="text-[1rem] text-ink-muted">
+                By {a.data.author} · Updated {a.data.updated}
+              </p>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,5 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import mdx from '@astrojs/mdx';
+import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  site: 'https://hydrationauthority.com',
+  trailingSlash: 'never',
+  integrations: [mdx(), sitemap()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});

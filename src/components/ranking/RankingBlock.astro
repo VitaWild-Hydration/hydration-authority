@@ -1,0 +1,102 @@
+---
+import { marked } from 'marked';
+import OurPickBadge from './OurPickBadge.astro';
+import RankBadge from './RankBadge.astro';
+import ScoreBadge from './ScoreBadge.astro';
+import CriterionRating from './CriterionRating.astro';
+import HASays from './HASays.astro';
+import VisitSiteCTA from './VisitSiteCTA.astro';
+
+interface Rating {
+  criterion: string;
+  score: number;
+  notes: string[];
+}
+
+interface Props {
+  rank: number;
+  brand: string;
+  productName: string;
+  productLogo?: string;
+  productImage?: string;
+  score: number;
+  stars?: number;
+  body: string;
+  ratings: Rating[];
+  haSays: string;
+  ctaUrl: string;
+  promoDisclaimer?: string;
+}
+
+const {
+  rank,
+  brand,
+  productName,
+  productLogo,
+  productImage,
+  score,
+  stars = 5,
+  body,
+  ratings,
+  haSays,
+  ctaUrl,
+  promoDisclaimer,
+} = Astro.props;
+
+marked.setOptions({ breaks: false, gfm: true });
+const bodyHtml = marked.parse(body);
+---
+
+<article class="bg-surface-card border border-border-card rounded-sm p-6 md:p-10 my-10">
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+    <div>
+      {rank === 1 ? <OurPickBadge /> : <RankBadge rank={rank} />}
+    </div>
+    <div class="flex flex-col items-start sm:items-end gap-3">
+      {productLogo && (
+        <img
+          src={productLogo}
+          alt={`${brand} logo`}
+          class="max-h-12 md:max-h-14 w-auto object-contain"
+        />
+      )}
+      <ScoreBadge score={score} stars={stars} />
+    </div>
+  </div>
+
+  <h2 class="font-heading font-bold text-[1.9rem] md:text-h2 text-ink-primary mt-6 mb-4">
+    {productName}
+  </h2>
+
+  {productImage && (
+    <img
+      src={productImage}
+      alt={productName}
+      class="w-full max-w-md h-auto object-contain my-5 float-none md:float-left md:mr-8 md:mb-4"
+    />
+  )}
+
+  <div class="prose-ha max-w-none" set:html={bodyHtml} />
+
+  <div class="clear-both mt-6">
+    {ratings.map((r) => (
+      <CriterionRating criterion={r.criterion} score={r.score} notes={r.notes} />
+    ))}
+  </div>
+
+  <HASays text={haSays} />
+
+  <div class="flex flex-col sm:flex-row gap-4 mt-6">
+    <VisitSiteCTA href={ctaUrl}>Visit Site</VisitSiteCTA>
+  </div>
+
+  {promoDisclaimer && (
+    <p class="mt-5 text-[1rem] italic text-ink-muted">
+      {promoDisclaimer}
+    </p>
+  )}
+
+  <div class="flex mt-6">
+    <VisitSiteCTA href={ctaUrl}>Visit Site</VisitSiteCTA>
+  </div>
+</article>

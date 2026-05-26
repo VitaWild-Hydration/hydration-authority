@@ -1,0 +1,69 @@
+---
+import '../../styles/global.css';
+import DisclosureBar from './DisclosureBar.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SEOHead from '../seo/SEOHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  author?: string;
+  updated?: string;
+  jsonLd?: Record<string, unknown> | null;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  type = 'website',
+  author,
+  updated,
+  jsonLd = null,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&family=Nunito+Sans:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* TODO phase 2: inject GTM container snippet here. Reads import.meta.env.PUBLIC_GTM_ID. */}
+
+    <SEOHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      type={type}
+      author={author}
+      updated={updated}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body class="bg-surface-page text-ink-primary font-body antialiased">
+    {/* TODO phase 2: inject GTM noscript iframe here. */}
+
+    <DisclosureBar />
+    <SiteHeader />
+    <main class="mx-auto max-w-[1280px] px-5 md:px-8">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

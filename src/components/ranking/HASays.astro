@@ -1,0 +1,11 @@
+---
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<p class="my-5 text-[1.15rem] md:text-[1.25rem] leading-[1.55] italic">
+  <strong class="font-black not-italic">Hydration Authority Says:</strong>{' '}
+  {text}
+</p>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1d2a"/>
+      <stop offset="1" stop-color="#3b3050"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <circle cx="1300" cy="700" r="240" fill="#FF9D00" opacity="0.08"/>
+  <circle cx="200" cy="200" r="180" fill="#FFFFFF" opacity="0.04"/>
+  <text x="80" y="780" font-family="'Rubik', 'Helvetica Neue', sans-serif" font-size="48" font-weight="700" fill="#FF9D00" letter-spacing="0.05em">
+    MEN'S PERFORMANCE
+  </text>
+  <text x="80" y="840" font-family="'Nunito Sans', 'Helvetica Neue', sans-serif" font-size="26" font-weight="400" fill="#FFFFFF" opacity="0.7" letter-spacing="0.08em">
+    HYDRATION AUTHORITY
+  </text>
+</svg>

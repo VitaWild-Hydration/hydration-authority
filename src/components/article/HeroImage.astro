@@ -1,0 +1,17 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+}
+const { src, alt } = Astro.props;
+---
+
+<figure class="my-6 md:my-8 overflow-hidden rounded-sm">
+  <img
+    src={src}
+    alt={alt}
+    loading="eager"
+    decoding="async"
+    class="w-full h-auto object-cover aspect-[16/9]"
+  />
+</figure>
