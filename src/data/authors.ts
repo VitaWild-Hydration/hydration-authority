@@ -24,19 +24,19 @@ export const authors: Record<string, Author> = {
   },
   'Maya Chen': {
     name: 'Maya Chen',
-    avatar: '/images/authors/maya-chen.jpg',
+    avatar: '/images/authors/maya-chen.png',
   },
   'Jamie Reeves': {
     name: 'Jamie Reeves',
-    avatar: '/images/authors/jamie-reeves.jpg',
+    avatar: '/images/authors/jamie-reeves.png',
   },
   'Hannah Wright': {
     name: 'Hannah Wright',
-    avatar: '/images/authors/hannah-wright.jpg',
+    avatar: '/images/authors/hannah-wright.png',
   },
   'Dr. Riya Patel': {
     name: 'Dr. Riya Patel',
-    avatar: '/images/authors/dr-riya-patel.jpg',
+    avatar: '/images/authors/dr-riya-patel.png',
   },
   'Adam Wagner': {
     name: 'Adam Wagner',
