@@ -54,31 +54,37 @@ html {
   font-size: 16px;
 }
 
-body {
-  background-color: var(--color-surface-page);
-  color: var(--color-ink-primary);
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: 0.02em;
+/* Element defaults live in @layer base so Tailwind utility classes
+   (which live in @layer utilities) can win over them on a per-element basis.
+   Without the layer, these unlayered rules would defeat any utility-class
+   color/size override on h1-h4. */
+@layer base {
+  body {
+    background-color: var(--color-surface-page);
+    color: var(--color-ink-primary);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-primary);
+  }
+
+  h1 { font-size: var(--text-h1); }
+  h2 { font-size: var(--text-h2); }
+  h3 { font-size: var(--text-h3); }
+  h4 { font-size: var(--text-h4); }
+
+  p { font-size: var(--text-p1); }
+
+  a { color: inherit; }
 }
-
-h1, h2, h3, h4 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.03em;
-  color: var(--color-ink-primary);
-}
-
-h1 { font-size: var(--text-h1); }
-h2 { font-size: var(--text-h2); }
-h3 { font-size: var(--text-h3); }
-h4 { font-size: var(--text-h4); }
-
-p { font-size: var(--text-p1); }
-
-a { color: inherit; }
 
 /* Article body — applied to MDX content rendered through <slot> */
 .prose-ha p { font-size: var(--text-p1); margin-block: 1em; }
