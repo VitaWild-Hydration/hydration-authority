@@ -48,11 +48,11 @@ const bodyHtml = marked.parse(body);
 ---
 
 <article class="bg-surface-card border border-border-card rounded-sm p-6 md:p-10 my-10">
-  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
-    <div>
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+    <div class="shrink-0">
       {rank === 1 ? <OurPickBadge /> : <RankBadge rank={rank} />}
     </div>
-    <div class="flex flex-col items-start sm:items-end gap-3">
+    <div class="flex flex-col items-start sm:items-end gap-2">
       {productLogo && (
         <img
           src={productLogo}
