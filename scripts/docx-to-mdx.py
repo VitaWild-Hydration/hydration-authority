@@ -76,7 +76,7 @@ BRAND_REGISTRY = {
 }
 
 VITAWILD_DEFAULT_PROMO = (
-    "At the time of writing, VitaWild was offering up to 43% off your first "
+    "At the time of writing, VitaWild was offering up to 55% off your first "
     "purchase + a free gift."
 )
 
