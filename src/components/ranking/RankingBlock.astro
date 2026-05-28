@@ -45,14 +45,11 @@ const {
 
 marked.setOptions({ breaks: false, gfm: true });
 const bodyHtml = marked.parse(body);
-
-const hasProductImage = Boolean(productImage);
 ---
 
 <article class="bg-surface-card border border-border-card rounded-sm p-6 md:p-10 my-10">
-  {/* Top row: rank badge on left, brand logo + score on right */}
-  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-2">
-    <div class="shrink-0">
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+    <div>
       {rank === 1 ? <OurPickBadge /> : <RankBadge rank={rank} />}
     </div>
     <div class="flex flex-col items-start sm:items-end gap-3">
@@ -60,38 +57,28 @@ const hasProductImage = Boolean(productImage);
         <img
           src={productLogo}
           alt={`${brand} logo`}
-          class="max-h-16 md:max-h-20 w-auto max-w-[260px] object-contain"
+          class="max-h-12 md:max-h-14 w-auto object-contain"
         />
       )}
       <ScoreBadge score={score} stars={stars} />
     </div>
   </div>
 
-  {/* Product name as H2 */}
-  <h2 class="font-heading font-bold text-[1.9rem] md:text-h2 text-ink-primary mt-4 mb-5">
+  <h2 class="font-heading font-bold text-[1.9rem] md:text-h2 text-ink-primary mt-6 mb-4">
     {productName}
   </h2>
 
-  {/* Two-column layout: product image (when present) + body */}
-  <div class={`grid gap-6 md:gap-10 ${hasProductImage ? 'md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]' : 'md:grid-cols-1'}`}>
-    {hasProductImage && (
-      <div class="flex items-start justify-center">
-        <img
-          src={productImage}
-          alt={productName}
-          class="w-full max-w-sm h-auto object-contain"
-          loading="lazy"
-        />
-      </div>
-    )}
+  {productImage && (
+    <img
+      src={productImage}
+      alt={productName}
+      class="w-full max-w-md h-auto object-contain my-5 float-none md:float-left md:mr-8 md:mb-4"
+    />
+  )}
 
-    <div class="min-w-0">
-      <div class="prose-ha max-w-none" set:html={bodyHtml} />
-    </div>
-  </div>
+  <div class="prose-ha max-w-none" set:html={bodyHtml} />
 
-  {/* Ratings stretch full width below the 2-column block */}
-  <div class="mt-6">
+  <div class="clear-both mt-6">
     {ratings.map((r) => (
       <CriterionRating criterion={r.criterion} score={r.score} notes={r.notes} />
     ))}
