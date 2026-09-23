@@ -44,6 +44,7 @@ const articles = defineCollection({
       .object({
         productName: z.string(),
         useCase: z.string().optional(),
+        lifestyleImage: z.string().optional(),
         summary: z.string(),
         ctaUrl: z.string().url(),
       })
