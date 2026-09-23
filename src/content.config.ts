@@ -33,6 +33,7 @@ const articles = defineCollection({
     description: z.string(),
     heroImage: z.string(),
     topicBanner: z.string().optional(),
+    metaPixel: z.string().optional(),   // Meta pixel id fired on this article only (e.g. a sponsor's pixel)
     rankings: z.array(rankingSchema),
     conclusion: z
       .object({
